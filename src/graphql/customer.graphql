@@ -1,0 +1,28 @@
+fragment CustomerRefFragment on Customer {
+  customerId
+  name
+  email
+  referralCode
+  customerStatus
+}
+
+fragment CustomerFragment on Customer {
+  customerId
+  name
+  email
+  customerStatus
+  createdAt
+  updatedAt
+  emailStatus
+  referralCode
+  referralCustomerId
+  referees {
+    ...CustomerRefFragment
+  }
+  referrer {
+    ...CustomerRefFragment
+  }
+  wallets {
+    walletId
+  }
+}

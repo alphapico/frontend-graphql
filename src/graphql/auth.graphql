@@ -1,0 +1,36 @@
+mutation Login($input: LoginInput!) {
+  login(input: $input)
+}
+
+mutation Logout {
+  logout
+}
+
+mutation RefreshTokens {
+  refreshTokens
+}
+
+mutation SuspendCustomer($customerId: Int!) {
+  suspendCustomer(customerId: $customerId) {
+    ...CustomerChargeFragment
+  }
+}
+
+mutation ReinstateCustomer($customerId: Int!) {
+  reinstateCustomer(customerId: $customerId) {
+    customerId
+    name
+    email
+    customerStatus
+    referralCode
+    referralCustomerId
+  }
+}
+
+query ProtectedMethod {
+  protectedMethod {
+    sub
+    email
+    role
+  }
+}

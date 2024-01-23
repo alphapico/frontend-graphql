@@ -1,0 +1,82 @@
+query GetCharges($code: String, $cursor: Int, $customerId: Int, $limit: Int!) {
+  getCharges(
+    code: $code
+    cursor: $cursor
+    customerId: $customerId
+    limit: $limit
+  ) {
+    data {
+      ...ChargeFragment
+    }
+    nextPageCursor
+  }
+}
+
+fragment CustomerChargeFragment on Customer {
+  customerId
+  name
+  email
+  customerStatus
+}
+
+fragment ChargeFragment on Charge {
+  chargeId
+  code
+  name
+  description
+  pricingType
+  addresses
+  pricing
+  exchangeRates
+  localExchangeRates
+  hostedUrl
+  cancelUrl
+  redirectUrl
+  feeRate
+  expiresAt
+  paymentThreshold
+  createdAt
+  updatedAt
+  customer {
+    ...CustomerChargeFragment
+  }
+  payments {
+    paymentId
+    chargeId
+    network
+    transaction
+    value
+    type
+    status
+    paymentStatus
+    unresolvedReason
+    createdAt
+    updatedAt
+  }
+  commissions {
+    commissionId
+    customerId
+    chargeId
+    tier
+    commissionRate
+    amount
+    currency
+    isTransferred
+    createdAt
+    updatedAt
+  }
+  purchaseActivity {
+    purchaseActivityId
+    chargeId
+    packageId
+    tokenPriceId
+    tokenAmount
+    price
+    amount
+    currency
+    purchaseConfirmed
+    paymentStatus
+    createdAt
+    updatedAt
+  }
+}
